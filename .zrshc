@@ -1,0 +1,1 @@
+/home/bindubhatoy/.zshrc
