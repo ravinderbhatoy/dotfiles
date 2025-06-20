@@ -1,1 +1,0 @@
-/home/bindubhatoy/.config/i3
