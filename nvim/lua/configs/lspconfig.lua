@@ -1,19 +1,47 @@
-require("nvchad.configs.lspconfig").defaults()
+local lspconfig = require("lspconfig")
+local defaults = require("nvchad.configs.lspconfig")
 
-local servers = { "html", "cssls", "clangd", "pylsp", "tsserver" }
-vim.lsp.enable(servers)
+local on_attach = defaults.on_attach
+local capabilities = defaults.capabilities
 
--- read :h vim.lsp.config for changing options of lsp servers
---
-vim.lsp.config("pylsp", {
+-- Python
+lspconfig.pylsp.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
-    pylsp = { -- This second 'pylsp' key is necessary for the settings to be applied correctly
+    pylsp = {
       plugins = {
         pycodestyle = {
           enabled = true,
-          ignore = { "E501" }, -- Ignore the "line too long" error code
+          ignore = { "E501" },
         },
       },
     },
   },
-})
+}
+
+-- TypeScript / React
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- Tailwind / NativeWind
+lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {
+    "html",
+    "css",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+  },
+}
+
+-- ESLint
+lspconfig.eslint.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}

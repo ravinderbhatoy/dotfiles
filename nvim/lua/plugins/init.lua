@@ -16,7 +16,17 @@ return {
     event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
-
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+        variant = "moon", -- "main", "moon", or "dawn"
+        dark_variant = "main",
+        styles = { italic = true },
+      })
+    end,
+  },
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",

@@ -4,9 +4,12 @@
 
 ---@type ChadrcConfig
 local M = {}
+M.ui = {
+  theme = "rose-pine",
+}
 
 M.base46 = {
-  theme = "aquarium",
+  theme = "rosepine",
   transparency = true,
   hl_override = {
     Comment = { italic = true },
