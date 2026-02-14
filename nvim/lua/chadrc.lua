@@ -17,6 +17,7 @@ M.base46 = {
   },
 }
 
+
 M.term = {
   winopts = { number = false },
   sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
@@ -35,5 +36,22 @@ M.term = {
 --          lazyload = false
 --      }
 -- }
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.diagnostic.config({
+      virtual_text = {
+        prefix = "●",
+      },
+      signs = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        border = "rounded",
+        source = "always",
+      },
+    })
+  end,
+})
 
 return M

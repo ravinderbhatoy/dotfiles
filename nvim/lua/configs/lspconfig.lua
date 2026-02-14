@@ -1,35 +1,37 @@
-local lspconfig = require("lspconfig")
+
 local defaults = require("nvchad.configs.lspconfig")
 
-local on_attach = defaults.on_attach
-local capabilities = defaults.capabilities
+vim.lsp.config("clangd", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
+})
 
--- Python
-lspconfig.pylsp.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config("pylsp", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
+
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
           enabled = true,
-          ignore = { "E501" },
+          ignore = { "E501" }, -- must be uppercase
         },
+        pyflakes = { enabled = true },
+        mccabe = { enabled = true },
       },
     },
   },
-}
+})
 
--- TypeScript / React
-lspconfig.tsserver.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.config("tsserver", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
+})
 
--- Tailwind / NativeWind
-lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
+vim.lsp.config("tailwindcss", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
   filetypes = {
     "html",
     "css",
@@ -38,10 +40,18 @@ lspconfig.tailwindcss.setup {
     "typescript",
     "typescriptreact",
   },
-}
+})
 
--- ESLint
-lspconfig.eslint.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.config("eslint", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
+})
+
+
+vim.lsp.enable({
+  "clangd",
+  "pylsp",
+  "tsserver",
+  "tailwindcss",
+  "eslint",
+})
