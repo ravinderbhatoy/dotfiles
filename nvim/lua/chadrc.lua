@@ -37,21 +37,24 @@ M.term = {
 --      }
 -- }
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.diagnostic.config({
-      virtual_text = {
-        prefix = "●",
-      },
-      signs = true,
-      underline = true,
-      severity_sort = true,
-      float = {
-        border = "rounded",
-        source = "always",
-      },
-    })
-  end,
+
+vim.diagnostic.config({
+  virtual_text = false,
+  underline = true,
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "●",
+      [vim.diagnostic.severity.WARN]  = "Y",
+      [vim.diagnostic.severity.INFO]  = "I",
+      [vim.diagnostic.severity.HINT]  = "H",
+    },
+  },
+  float = {
+    border = "rounded",
+    source = "always",
+  },
 })
+
 
 return M
