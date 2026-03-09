@@ -131,30 +131,14 @@ label-urgent-font = 2
 [module/pulseaudio]
 type = internal/pulseaudio
 
-label-volume = "   %percentage%% |"
-label-volume-foreground = ${colors.yellow}
+label-volume = "  %percentage%% |"
+label-volume-foreground = ${colors.darkmagenta}
 label-volume-font = 2
 
 label-muted = "   muted "
-label-muted-foreground = ${colors.yellow}
+label-muted-foreground = ${colors.blue}
 label-muted-font = 2
 
-bar-volume-width = 10
-bar-volume-foreground-0 = ${colors.yellow}
-bar-volume-foreground-1 = ${colors.yellow}
-bar-volume-foreground-2 = ${colors.yellow}
-bar-volume-foreground-3 = ${colors.yellow}
-bar-volume-foreground-4 = ${colors.yellow}
-bar-volume-foreground-5 = ${colors.yellow}
-bar-volume-foreground-6 = ${colors.yellow}
-bar-volume-gradient = true
-bar-volume-indicator = 
-bar-volume-indicator-font = 1
-bar-volume-fill = 
-bar-volume-fill-font = 1
-bar-volume-empty = 
-bar-volume-empty-font = 1
-bar-volume-empty-foreground = ${colors.white}
 
 ;;==========================================================
 
@@ -172,24 +156,24 @@ time-format = %H:%M
 format-font = 2
 format-charging-font = 2
 format-charging = <animation-charging> <label-charging>
-format-charging-foreground = ${colors.foreground}
+format-charging-foreground = #2cd179
 format-charging-padding = 1
-label-charging-foreground = ${colors.yellow}
+label-charging-foreground = #2cd179
 
 format-discharging = <ramp-capacity><label-discharging>
 format-discharging-foreground = ${colors.foreground}
 format-discharging-padding = 1
-label-discharging-foreground = ${colors.yellow}
+label-discharging-foreground = ${colors.foreground}
 format-discharging-font = 2
 
 label-charging-font = 2
-label-charging = "%percentage%% |"
+label-charging = "%percentage%%"
 label-discharging-font = 2
-label-discharging = "%percentage%% |"
+label-discharging = "%percentage%%"
 
 label-full-font = 2
-label-full = " %percentage%% |"
-label-full-foreground = ${colors.yellow}
+label-full = " %percentage%%"
+label-full-foreground = ${colors.foreground}
 label-full-padding = 1
 
 ramp-capacity-0 = " "
@@ -197,7 +181,7 @@ ramp-capacity-1 = " "
 ramp-capacity-2 = " "
 ramp-capacity-3 = " "
 ramp-capacity-4 = " "
-ramp-capacity-foreground = ${colors.yellow}
+ramp-capacity-foreground = ${colors.foreground}
 ramp-capacity-1-foreground = ${colors.red}
 ramp-capacity-0-foreground = ${colors.red}
 
@@ -213,6 +197,8 @@ animation-discharging-2 = " "
 animation-discharging-3 = " "
 animation-discharging-4 = " "
 
+animation-charging-foreground = #2cd179
+
 animation-charging-framerate = 750
 
 ;;==========================================================
@@ -221,14 +207,14 @@ animation-charging-framerate = 750
 type = internal/date
 interval = 1.0
 
-time = "󰃰 %Y-%m-%d %H:%M"
-time-alt =  %H:%M
+time = " %d-%m-%Y"
+time-alt = " %H:%M"
 
 format = <label>
 format-font = 2
 format-padding = 1
 label = %time%
-label-foreground = ${colors.yellow}
+label-foreground = ${colors.white}
 
 ;;==========================================================
 
@@ -265,21 +251,21 @@ format-disconnected-padding = 1
 label-font = 2
 label-connected = "%{A1:nm-connection-editor&:}%{A2:nm-applet&:}%{A3:bash ~/dotfiles/scripts/toggle_wifi.sh:} %signal%% %essid% |"
 label-disconnected = "%{A1:nm-connection-editor&:}%{A2:nm-applet&:}%{A3:bash ~/dotfiles/scripts/toggle_wifi.sh:}󰤮 null%{A}%{A}%{A} |"
-label-connected-foreground = ${colors.yellow}
+label-connected-foreground = ${colors.foreground}
 label-disconnected-foreground = ${colors.red}
 ramp-signal-0 = 󰤫
 ramp-signal-1 = 󰤠
 ramp-signal-2 = 󰤢
 ramp-signal-3 = 󰤥
 ramp-signal-4 = 󰤨
-ramp-signal-foreground = ${colors.yellow}
+ramp-signal-foreground = ${colors.foreground}
 
 ;;==========================================================
 
 [module/cpu]
 type = internal/cpu
-label = " %percentage%% |"
-label-foreground = ${colors.yellow}
+label = "  %percentage%% |"
+label-foreground = ${colors.darkmagenta}
 label-mounted-font = 2
 interval = 0.5
 warn-percentage = 95
@@ -290,36 +276,10 @@ warn-percentage = 95
 
 type = internal/memory
 interval = 2
-label = "   %percentage_used%% |"
+label = "  %percentage_used%% |"
 format-prefix-font = 2
-label-foreground = ${colors.yellow}
+label-foreground = ${colors.foreground}
 label-font = 2
-
-;;==========================================================
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp><label>
-format-warn = <ramp><label-warn>
-format-font = 2
-
-label = "%temperature-c% "
-label-warn = %temperature-c%
-label-warn-background = ${colors.darkgreen}
-label-warn-foreground = ${colors.darkblue}
-label-font = 2
-label-warn-font = 2
-
-ramp-0 = " 󰏈 "
-ramp-1 = " 󰏈 "
-ramp-2 = " 󰏈 "
-ramp-background = ${colors.darkblue}
-ramp-foreground = ${colors.darkgreen}
-ramp-font = 5
-
 ;;==========================================================
 ;;	    __________  ______
 ;;	   / ____/ __ \/ ____/
