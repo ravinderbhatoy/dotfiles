@@ -67,8 +67,8 @@ bindsym $mod+shift+f exec thunar
 bindsym $mod+shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun \
-        -config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun -show-icons \
+        -config ~/.config/rofi/config.rasi
 
 # change focus
 bindsym $mod+j focus left
