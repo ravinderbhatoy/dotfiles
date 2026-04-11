@@ -1,4 +1,4 @@
-local defaults = require("nvchad.configs.lspconfig")
+local defaults = require "nvchad.configs.lspconfig"
 
 -- C/C++
 vim.lsp.config("clangd", {
@@ -10,18 +10,6 @@ vim.lsp.config("clangd", {
 vim.lsp.config("pylsp", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
-  -- settings = {
-  --   pylsp = {
-  --     plugins = {
-  --       pycodestyle = {
-  --         enabled = true,
-  --         ignore = { "E501" }, -- must be uppercase
-  --       },
-  --       pyflakes = { enabled = true },
-  --       mccabe = { enabled = true },
-  --     },
-  --   },
-  -- },
 })
 
 -- TypeScript / React Native
@@ -41,14 +29,26 @@ vim.lsp.config("jsonls", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
 })
+-- Go
+vim.lsp.config("gopls", {
+  on_attach = defaults.on_attach,
+  capabilities = defaults.capabilities,
+  settings = {
+    gopls = {
+      semanticTokens = true, -- this is the key line
+    },
+  },
+})
 
-vim.lsp.enable({
+vim.lsp.enable {
   "clangd",
   "pylsp",
   "ts_ls",
   "eslint",
   "jsonls",
-})
+  "tailwindCSS",
+  "gopls",
+}
 
 vim.lsp.config("tailwindcss", {
   on_attach = defaults.on_attach,
@@ -65,5 +65,3 @@ vim.lsp.config("tailwindcss", {
     },
   },
 })
-
-vim.lsp.enable({ "tailwindcss" })
