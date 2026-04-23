@@ -87,7 +87,7 @@ label-mode-foreground = ${colors.yellow}
 label-mode-font = 2
 
 ; focused = Active workspace on focused monitor
-label-focused = %name%
+label-focused = ""
 label-focused-foreground = ${colors.yellow}
 label-focused-background = ${colors.background}
 label-focused-padding = 1
@@ -207,8 +207,8 @@ animation-charging-framerate = 750
 type = internal/date
 interval = 1.0
 
-time = " %d-%m-%Y"
-time-alt = " %H:%M"
+time = "%A %H:%M"
+time-alt = " %d-%m-%Y"
 
 format = <label>
 format-font = 2
@@ -290,4 +290,3 @@ label-font = 2
 ;;==========================================================
 
 ; vim:ft=dosini
-
