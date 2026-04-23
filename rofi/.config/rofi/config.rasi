@@ -1,0 +1,21 @@
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+
+window {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: @background;
+}
+
+element {
+    padding: 8px;
+}
+
+element selected {
+    background-color: @foreground;
+    text-color: @background;
+}
+
+entry {
+    padding: 10px;
+}

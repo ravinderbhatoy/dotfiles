@@ -17,7 +17,6 @@ M.base46 = {
   },
 }
 
-
 M.term = {
   winopts = { number = false },
   sizes = { sp = 0.3, vsp = 0.2, ["bo sp"] = 0.3, ["bo vsp"] = 0.2 },
@@ -30,31 +29,29 @@ M.term = {
   },
 }
 
--- M.nvdash = { load_on_startup = true }
+M.nvdash = { load_on_startup = true }
 -- M.ui = {
 --       tabufline = {
 --          lazyload = false
 --      }
 -- }
 
-
-vim.diagnostic.config({
+vim.diagnostic.config {
   virtual_text = false,
   underline = true,
   severity_sort = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "●",
-      [vim.diagnostic.severity.WARN]  = "Y",
-      [vim.diagnostic.severity.INFO]  = "I",
-      [vim.diagnostic.severity.HINT]  = "H",
+      [vim.diagnostic.severity.WARN] = "Y",
+      [vim.diagnostic.severity.INFO] = "I",
+      [vim.diagnostic.severity.HINT] = "H",
     },
   },
   float = {
     border = "rounded",
     source = "always",
   },
-})
-
+}
 
 return M

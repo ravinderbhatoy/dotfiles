@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -eu
+
+key="${1:-}"
+tmp_file="$(mktemp)"
+cat > "$tmp_file"
+
+case "$key" in
+    w)
+        wallpaper="$(sed -n '1p' "$tmp_file")"
+        [ -n "${wallpaper:-}" ] || exit 0
+        "$HOME/.config/i3/apply-wallpaper.sh" "$wallpaper"
+        ;;
+esac
+
+rm -f "$tmp_file"

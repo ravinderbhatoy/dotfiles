@@ -31,10 +31,6 @@ exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
 
-# set wallpaper
-# exec --no-startup-id feh --bg-scale ~/Downloads/wallpapers-bank/bg_17.jpg
-# set wallpaper-scheme
-# exec --no-startup-id wal -i ~/Downloads/wallpapers-bank/
 exec --no-startup-id wal -R
 
 # swap escape with capslock
@@ -68,6 +64,7 @@ bindsym $mod+shift+q kill
 # start rofi (a program launcher)
 bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun -show-icons \
         -config ~/.config/rofi/config.rasi
+bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/browse-wallpapers.sh
 
 # change focus
 bindsym $mod+j focus left
