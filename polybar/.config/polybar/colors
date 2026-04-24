@@ -8,7 +8,7 @@ background = ${xrdb:background:#2f343f}
 
 black       = ${xrdb:color0:#1d2021}
 darkred     = ${xrdb:color1:#cc241d}
-darkgreen   = ${xrdb:color2:##0f8548}
+darkgreen   = ${xrdb:color2:#0f8548}
 darkyellow  = ${xrdb:color3:#d79921}
 darkblue    = ${xrdb:color4:#255ea1}
 darkmagenta = ${xrdb:color5:#b16286}
@@ -22,4 +22,5 @@ yellow      = ${xrdb:color11:#ffc85e}
 blue        = ${xrdb:color12:#5294e2}
 darkpurple  = ${xrdb:color13:#e86ba4}
 cyan        = ${xrdb:color14:#68d4ce}
-white       = ${xrdb:color15:#f3f4f5}; vim:ft=dosini
+white       = ${xrdb:color15:#f3f4f5}
+lightred    = ${xrdb:color9:#e53935}

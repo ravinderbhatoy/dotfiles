@@ -10,12 +10,12 @@
 
 [module/launcher]
 type = custom/text
-content = 
+format = 
 
-; content-background = ${colors.background}
-; content-foreground = ${colors.foreground}
-content-padding = 1
-content-font = 4
+; format-background = ${colors.background}
+; format-foreground = ${colors.foreground}
+format-padding = 1
+format-font = 4
 
 ;click-left = rofi -monitor -1 -show drun -location 1 -columns 2 -yoffset 27 -lines 20 -width 30 -font "Hack Nerd Font Regular 14"
 
@@ -131,13 +131,30 @@ label-urgent-font = 2
 [module/pulseaudio]
 type = internal/pulseaudio
 
-label-volume = "  %percentage%% |"
+label-volume = "  %percentage%% | "
 label-volume-foreground = ${colors.darkmagenta}
 label-volume-font = 2
 
 label-muted = "   muted "
 label-muted-foreground = ${colors.blue}
 label-muted-font = 2
+
+;;==========================================================
+
+[module/brightness]
+type = custom/script
+exec = sh -c 'pct=$(brightnessctl -m | cut -d, -f4 | tr -d "%"); if [ "$pct" -le 25 ]; then icon="󰃞"; elif [ "$pct" -le 50 ]; then icon="󰃟"; elif [ "$pct" -le 75 ]; then icon="󰃝"; else icon="󰃠"; fi; printf "%s %s%% |\n" "$icon" "$pct"'
+interval = 1
+
+format = <label>
+format-foreground = ${colors.yellow}
+format-font = 2
+
+label = %output%
+label-font = 2
+
+scroll-up = ~/.config/polybar/brightnessctl.sh up
+scroll-down = ~/.config/polybar/brightnessctl.sh down
 
 
 ;;==========================================================
