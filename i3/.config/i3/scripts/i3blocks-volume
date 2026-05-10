@@ -1,0 +1,20 @@
+#!/bin/sh
+
+if [ "${BLOCK_BUTTON:-}" = "1" ]; then
+    pavucontrol >/dev/null 2>&1 &
+fi
+
+mute=$(timeout 1s pactl get-sink-mute @DEFAULT_SINK@ 2>/dev/null | awk '{print $2}')
+volume=$(timeout 1s pactl get-sink-volume @DEFAULT_SINK@ 2>/dev/null | awk 'NR==1 {print $5}')
+
+if [ -z "$volume" ]; then
+    volume=$(timeout 1s amixer -D pulse get Master 2>/dev/null | awk -F'[][]' 'END {print $2}')
+fi
+
+if [ -z "$volume" ]; then
+    printf ' n/a\n'
+elif [ "$mute" = "yes" ]; then
+    printf ' %s\n' "${volume:-muted}"
+else
+    printf ' %s\n' "${volume:-n/a}"
+fi

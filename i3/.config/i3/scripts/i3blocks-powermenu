@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ -n "${BLOCK_BUTTON:-}" ]; then
+    choice=$(printf 'Lock\nLogout\nReboot\nShutdown\n' | rofi -dmenu -p power)
+    case "$choice" in
+        Lock)
+            i3lock >/dev/null 2>&1
+            ;;
+        Logout)
+            i3-msg exit >/dev/null 2>&1
+            ;;
+        Reboot)
+            systemctl reboot >/dev/null 2>&1
+            ;;
+        Shutdown)
+            systemctl poweroff >/dev/null 2>&1
+            ;;
+    esac
+fi
+
+printf '\n'

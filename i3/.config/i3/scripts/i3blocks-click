@@ -1,0 +1,10 @@
+#!/bin/sh
+
+text=$1
+shift
+
+if [ -n "${BLOCK_BUTTON:-}" ] && [ "$#" -gt 0 ]; then
+    "$@" >/dev/null 2>&1 &
+fi
+
+printf '%s\n' "$text"

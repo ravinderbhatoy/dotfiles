@@ -1,0 +1,23 @@
+#!/bin/sh
+
+connected=$(nmcli -t -f TYPE,STATE,CONNECTION device 2>/dev/null | awk -F: '$2=="connected"{print $1":"$3; exit}')
+
+if [ -z "$connected" ]; then
+    printf ' offline\n'
+    exit 0
+fi
+
+type=${connected%%:*}
+name=${connected#*:}
+
+case "$type" in
+    wifi)
+        printf ' %s\n' "$name"
+        ;;
+    ethernet)
+        printf ' %s\n' "$name"
+        ;;
+    *)
+        printf ' %s\n' "$name"
+        ;;
+esac

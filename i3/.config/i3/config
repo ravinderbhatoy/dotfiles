@@ -9,9 +9,6 @@ set $mod Mod4
 # keyboard key repeat rate       (delay) (speed)
 exec --no-startup-id xset r rate 550 20
 
-# mouse sensitivity
-# exec --no-startup-id xinput --set-prop 16 'libinput Accel Speed' -0.65
-
 
 # Backlight
 #
@@ -26,7 +23,7 @@ font pango: Hack NF 10
 
 # Startup apps
 
-exec --no-startup-id polybar -r
+# Use i3's built-in bar instead of polybar.
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
@@ -40,9 +37,9 @@ exec --no-startup-id setxkbmap -option 'caps:swapescape'
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id sh -c 'pactl set-sink-volume @DEFAULT_SINK@ +10% && pkill -RTMIN+10 i3blocks'
+bindsym XF86AudioLowerVolume exec --no-startup-id sh -c 'pactl set-sink-volume @DEFAULT_SINK@ -10% && pkill -RTMIN+10 i3blocks'
+bindsym XF86AudioMute exec --no-startup-id sh -c 'pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks'
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -56,6 +53,8 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec kitty
 # launch apps
 bindsym $mod+b exec zen-browser
+bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
+bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so
 bindsym $mod+shift+f exec thunar
 
 # kill focused window
@@ -195,10 +194,10 @@ bindsym $mod+r mode "resize"
 
 # Set inner/outer gaps
 gaps inner 8
-gaps outer 0
+# gaps outer 0
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-# smart_gaps on
+smart_gaps on
 
 # Borders
 default_border pixel 2
@@ -219,3 +218,12 @@ client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
+
+bar {
+    font pango:Noto Sans Regular 10, FontAwesome 10
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    position bottom
+    tray_output primary
+    tray_padding 0
+    strip_workspace_numbers yes
+}
