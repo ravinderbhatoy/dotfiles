@@ -15,7 +15,6 @@ exec --no-startup-id xset r rate 550 20
     bindsym XF86MonBrightnessUp exec brightnessctl -c backlight set +3%
     bindsym XF86MonBrightnessDown exec brightnessctl -c backlight set 3%-
     bindsym Print exec flameshot gui
-
 #
 
 # Font
@@ -25,13 +24,14 @@ font pango: Hack NF 10
 
 # Use i3's built-in bar instead of polybar.
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
+exec_always --no-startup-id "pkill -f '$HOME/.config/i3/scripts/low-battery-warning'; $HOME/.config/i3/scripts/low-battery-warning"
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
 
 exec --no-startup-id wal -R
 
 # swap escape with capslock
-exec --no-startup-id setxkbmap -option 'caps:swapescape'
+# exec --no-startup-id setxkbmap -option 'caps:swapescape'
 
 # start i3 components
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
@@ -49,13 +49,15 @@ floating_modifier $mod
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
 
-# start a terminal
-bindsym $mod+Return exec kitty
+
 # launch apps
+bindsym $mod+Return exec kitty
 bindsym $mod+b exec zen-browser
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so
 bindsym $mod+shift+f exec thunar
+
+
 
 # kill focused window
 bindsym $mod+shift+q kill

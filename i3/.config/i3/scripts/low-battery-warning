@@ -1,0 +1,76 @@
+#!/bin/sh
+
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}"
+STATE_FILE="$STATE_DIR/low-battery-warning.state"
+CHECK_INTERVAL=60
+WARN_LEVEL=20
+CRITICAL_LEVEL=10
+
+get_battery_dir() {
+    for supply in /sys/class/power_supply/BAT*; do
+        [ -d "$supply" ] && printf '%s\n' "$supply" && return 0
+    done
+
+    return 1
+}
+
+send_warning() {
+    level="$1"
+    urgency="$2"
+    timeout="$3"
+
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send -u "$urgency" -t "$timeout" "Low battery" "Battery is at ${level}%. Plug in the charger."
+    fi
+}
+
+last_alert=""
+
+if [ -f "$STATE_FILE" ]; then
+    last_alert=$(cat "$STATE_FILE" 2>/dev/null)
+fi
+
+while :; do
+    battery_dir=$(get_battery_dir) || exit 0
+    capacity=$(cat "$battery_dir/capacity" 2>/dev/null)
+    status=$(cat "$battery_dir/status" 2>/dev/null)
+
+    case "$status" in
+        Charging|Full|Not\ charging|Unknown)
+            last_alert=""
+            : > "$STATE_FILE"
+            sleep "$CHECK_INTERVAL"
+            continue
+            ;;
+    esac
+
+    if [ -z "$capacity" ]; then
+        sleep "$CHECK_INTERVAL"
+        continue
+    fi
+
+    alert_level=""
+    urgency="normal"
+    timeout=5000
+
+    if [ "$capacity" -le "$CRITICAL_LEVEL" ]; then
+        alert_level="$CRITICAL_LEVEL"
+        urgency="critical"
+        timeout=0
+    elif [ "$capacity" -le "$WARN_LEVEL" ]; then
+        alert_level="$WARN_LEVEL"
+        urgency="normal"
+        timeout=5000
+    fi
+
+    if [ -n "$alert_level" ] && [ "$last_alert" != "$alert_level" ]; then
+        send_warning "$capacity" "$urgency" "$timeout"
+        last_alert="$alert_level"
+        printf '%s\n' "$last_alert" > "$STATE_FILE"
+    elif [ "$capacity" -gt "$WARN_LEVEL" ] && [ -n "$last_alert" ]; then
+        last_alert=""
+        : > "$STATE_FILE"
+    fi
+
+    sleep "$CHECK_INTERVAL"
+done

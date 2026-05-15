@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "catppuccin",
+  theme = "onenord",
   transparency = true,
   hl_override = {
     Comment = { italic = true },
