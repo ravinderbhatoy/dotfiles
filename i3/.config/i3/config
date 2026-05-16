@@ -22,7 +22,8 @@ font pango: Hack NF 10
 
 # Startup apps
 
-# Use i3's built-in bar instead of polybar.
+# Start Polybar instead of i3's built-in bar.
+exec_always --no-startup-id "pkill -x polybar; polybar main"
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec_always --no-startup-id "pkill -f '$HOME/.config/i3/scripts/low-battery-warning'; $HOME/.config/i3/scripts/low-battery-warning"
 exec --no-startup-id picom
@@ -37,9 +38,9 @@ exec --no-startup-id wal -R
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id sh -c 'pactl set-sink-volume @DEFAULT_SINK@ +10% && pkill -RTMIN+10 i3blocks'
-bindsym XF86AudioLowerVolume exec --no-startup-id sh -c 'pactl set-sink-volume @DEFAULT_SINK@ -10% && pkill -RTMIN+10 i3blocks'
-bindsym XF86AudioMute exec --no-startup-id sh -c 'pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+10 i3blocks'
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -220,12 +221,3 @@ client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 
 client.background       $bg
-
-bar {
-    font pango:Noto Sans Regular 10, FontAwesome 10
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    position bottom
-    tray_output primary
-    tray_padding 0
-    strip_workspace_numbers yes
-}
