@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "onenord",
+  theme = "everforest",
   transparency = true,
   hl_override = {
     Comment = { italic = true },

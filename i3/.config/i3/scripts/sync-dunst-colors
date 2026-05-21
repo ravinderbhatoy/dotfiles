@@ -1,0 +1,25 @@
+#!/bin/sh
+
+WAL_COLORS="$HOME/.cache/wal/colors.sh"
+DUNST_CONFIG="$HOME/.config/dunst/dunstrc"
+
+[ -r "$WAL_COLORS" ] || exit 0
+[ -f "$DUNST_CONFIG" ] || exit 0
+
+. "$WAL_COLORS"
+
+FRAME_COLOR="${color5:-#D19576}"
+
+tmp_file=$(mktemp)
+trap 'rm -f "$tmp_file"' EXIT
+
+awk -v frame_color="$FRAME_COLOR" '
+    /^[[:space:]]*frame_color = / {
+        sub(/".*"/, "\"" frame_color "\"")
+    }
+    { print }
+' "$DUNST_CONFIG" > "$tmp_file" && mv "$tmp_file" "$DUNST_CONFIG"
+
+if command -v dunstctl >/dev/null 2>&1 && pgrep -x dunst >/dev/null 2>&1; then
+    dunstctl reload "$DUNST_CONFIG" >/dev/null 2>&1 || true
+fi

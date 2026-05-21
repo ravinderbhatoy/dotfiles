@@ -2,9 +2,11 @@
 
 STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}"
 STATE_FILE="$STATE_DIR/low-battery-warning.state"
+LOG_FILE="$STATE_DIR/low-battery-warning.log"
 CHECK_INTERVAL=60
 WARN_LEVEL=20
 CRITICAL_LEVEL=10
+STATE_TTL=900
 
 get_battery_dir() {
     for supply in /sys/class/power_supply/BAT*; do
@@ -18,26 +20,45 @@ send_warning() {
     level="$1"
     urgency="$2"
     timeout="$3"
+    message="Battery is at ${level}%. Plug in the charger."
+    title="Low battery"
 
     if command -v notify-send >/dev/null 2>&1; then
-        notify-send -u "$urgency" -t "$timeout" "Low battery" "Battery is at ${level}%. Plug in the charger."
+        if notify-send -u "$urgency" -t "$timeout" "$title" "$message" 2>>"$LOG_FILE"; then
+            return 0
+        fi
     fi
+
+    if command -v i3-nagbar >/dev/null 2>&1; then
+        i3-nagbar -t warning -m "$title: $message" >/dev/null 2>>"$LOG_FILE" &
+        return 0
+    fi
+
+    if command -v xmessage >/dev/null 2>&1; then
+        xmessage -center "$title: $message" >/dev/null 2>>"$LOG_FILE" &
+        return 0
+    fi
+
+    printf '%s %s\n' "$(date '+%F %T')" "$title: $message" >> "$LOG_FILE"
 }
 
-last_alert=""
+last_band=""
+last_time=0
 
 if [ -f "$STATE_FILE" ]; then
-    last_alert=$(cat "$STATE_FILE" 2>/dev/null)
+    IFS='|' read -r last_band last_time < "$STATE_FILE"
 fi
 
 while :; do
     battery_dir=$(get_battery_dir) || exit 0
     capacity=$(cat "$battery_dir/capacity" 2>/dev/null)
     status=$(cat "$battery_dir/status" 2>/dev/null)
+    now=$(date +%s)
 
     case "$status" in
         Charging|Full|Not\ charging|Unknown)
-            last_alert=""
+            last_band=""
+            last_time=0
             : > "$STATE_FILE"
             sleep "$CHECK_INTERVAL"
             continue
@@ -49,26 +70,38 @@ while :; do
         continue
     fi
 
-    alert_level=""
+    current_band=""
     urgency="normal"
     timeout=5000
 
     if [ "$capacity" -le "$CRITICAL_LEVEL" ]; then
-        alert_level="$CRITICAL_LEVEL"
+        current_band="critical"
         urgency="critical"
         timeout=0
     elif [ "$capacity" -le "$WARN_LEVEL" ]; then
-        alert_level="$WARN_LEVEL"
-        urgency="normal"
-        timeout=5000
+        current_band="warning"
     fi
 
-    if [ -n "$alert_level" ] && [ "$last_alert" != "$alert_level" ]; then
+    if [ -n "$current_band" ] && {
+        [ "$last_band" != "$current_band" ] ||
+        [ -z "$last_time" ] ||
+        [ $((now - last_time)) -ge "$STATE_TTL" ]
+    }; then
         send_warning "$capacity" "$urgency" "$timeout"
-        last_alert="$alert_level"
-        printf '%s\n' "$last_alert" > "$STATE_FILE"
-    elif [ "$capacity" -gt "$WARN_LEVEL" ] && [ -n "$last_alert" ]; then
-        last_alert=""
+        last_band="$current_band"
+        last_time="$now"
+        printf '%s|%s\n' "$last_band" "$last_time" > "$STATE_FILE"
+    elif [ -z "$current_band" ] && [ -n "$last_band" ]; then
+        last_band=""
+        last_time=0
+        : > "$STATE_FILE"
+    elif [ "$current_band" = "warning" ] && [ "$last_band" = "critical" ]; then
+        last_band="$current_band"
+        last_time="$now"
+        printf '%s|%s\n' "$last_band" "$last_time" > "$STATE_FILE"
+    elif [ "$capacity" -gt "$WARN_LEVEL" ] && [ -n "$last_band" ]; then
+        last_band=""
+        last_time=0
         : > "$STATE_FILE"
     fi
 
