@@ -40,6 +40,12 @@ Core desktop tools used by these configs:
 sudo pacman -S stow i3-wm i3blocks polybar rofi picom dunst kitty feh pywal nsxiv xss-lock xclip brightnessctl flameshot autotiling
 ```
 
+Bluetooth tray and notifications:
+
+```sh
+sudo pacman -S blueman
+```
+
 You will also likely want:
 
 ```sh
@@ -49,6 +55,7 @@ sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts
 ## Notes
 
 - `i3` startup launches `dunst` for notifications.
+- `i3` startup launches `blueman-applet` for Bluetooth tray integration and notifications.
 - Low battery warnings are handled by `~/.config/i3/scripts/low-battery-warning`.
 - `dunst` border colors are synced to the current `pywal` theme by `~/.config/i3/scripts/sync-dunst-colors`.
 - Changing wallpaper through `~/.config/i3/apply-wallpaper.sh` also refreshes `pywal` and `dunst` colors.

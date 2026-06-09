@@ -87,4 +87,13 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+  {
+    -- moving lines up down
+    "fedepujol/move.nvim",
+    lazy = false,
+    opts = {
+      line = { enable = true, indent = true },
+      block = { enable = true, indent = true },
+    },
+  },
 }

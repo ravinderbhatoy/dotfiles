@@ -64,4 +64,5 @@ vim.lsp.config("tailwindcss", {
       classAttributes = { "class", "className", "style" },
     },
   },
+  lsp,
 })

@@ -1,4 +1,17 @@
 require "nvchad.options"
+local opt = vim.opt
+
+-- Set the maximum width for text to 80 characters
+vim.opt.textwidth = 80
+
+-- Enable soft wrapping
+opt.wrap = true
+
+-- Wrap lines at a character in 'breakat' (spaces, punctuation) instead of mid-word
+opt.linebreak = true
+
+-- Keep indentation structure when lines wrap visually
+opt.breakindent = true
 
 -- add yours here!
 

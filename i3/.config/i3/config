@@ -4,10 +4,10 @@
 
 
 # mod key (window)
-set $mod Mod4
+set $mod Mod1
 
 # keyboard key repeat rate       (delay) (speed)
-exec --no-startup-id xset r rate 550 20
+exec --no-startup-id xset r rate 100 20
 
 
 # Backlight
@@ -26,7 +26,9 @@ font pango: Hack NF 10
 exec_always --no-startup-id "pkill -x polybar; polybar main"
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec_always --no-startup-id "$HOME/.config/i3/scripts/sync-dunst-colors; pkill -x dunst; dunst"
+exec_always --no-startup-id "pkill -x blueman-applet; blueman-applet"
 exec_always --no-startup-id "pkill -f \"$HOME/.config/i3/scripts/low-battery-warning\"; $HOME/.config/i3/scripts/low-battery-warning"
+exec --no-startup-id kwalletd6
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
 
@@ -36,7 +38,8 @@ exec --no-startup-id wal -R
 # exec --no-startup-id setxkbmap -option 'caps:swapescape'
 
 # start i3 components
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# Auto-lock disabled; lock manually with i3lock when needed.
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # Use pactl to adjust volume in PulseAudio.
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%

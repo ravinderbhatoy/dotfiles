@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "everforest",
+  theme = "nightfox",
   transparency = true,
   hl_override = {
     Comment = { italic = true },
