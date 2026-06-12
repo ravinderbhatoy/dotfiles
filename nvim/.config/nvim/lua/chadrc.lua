@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "nightfox",
+  theme = "aquarium",
   transparency = true,
   hl_override = {
     Comment = { italic = true },
@@ -30,26 +30,20 @@ M.term = {
 }
 
 M.nvdash = { load_on_startup = true }
--- M.ui = {
---       tabufline = {
---          lazyload = false
---      }
--- }
 
 vim.diagnostic.config {
   virtual_text = false,
-  underline = true,
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "●",
+      [vim.diagnostic.severity.ERROR] = "E",
       [vim.diagnostic.severity.WARN] = "Y",
       [vim.diagnostic.severity.INFO] = "I",
       [vim.diagnostic.severity.HINT] = "H",
     },
   },
   float = {
-    border = "rounded",
+    border = "single",
     source = "always",
   },
 }

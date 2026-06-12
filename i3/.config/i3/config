@@ -35,7 +35,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id wal -R
 
 # swap escape with capslock
-# exec --no-startup-id setxkbmap -option 'caps:swapescape'
+exec --no-startup-id setxkbmap -option 'caps:swapescape'
 
 # start i3 components
 # Auto-lock disabled; lock manually with i3lock when needed.
@@ -57,8 +57,9 @@ tiling_drag modifier titlebar
 
 # launch apps
 bindsym $mod+Return exec kitty
-bindsym $mod+b exec zen-browser
+bindsym $mod+b exec brave
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
+bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so
 bindsym $mod+shift+f exec thunar
 
@@ -114,8 +115,8 @@ bindsym $mod+e layout toggle split
 bindsym $mod+t  exec --no-startup-id i3-resurrect restore
 bindsym $mod+y  exec --no-startup-id i3-resurrect save
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# toggle floating; when entering floating, make it medium sized and centered
+bindsym $mod+Shift+space fullscreen disable, floating toggle, resize set 1100 700, move position center
 
 # change focus between tiling / floating windows
 # bindsym $mod+d focus mode_toggle
