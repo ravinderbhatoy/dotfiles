@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "pastelbeans",
+  theme = "aylin",
   transparency = true,
   hl_override = {
     Comment = { italic = true },
@@ -34,6 +34,11 @@ M.nvdash = { load_on_startup = true }
 vim.diagnostic.config {
   virtual_text = false,
   severity_sort = true,
+
+  underline = {
+    severity = vim.diagnostic.severity.ERROR,
+  },
+
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "E",

@@ -18,6 +18,11 @@ opt.breakindent = true
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 vim.o.relativenumber = true
-vim.diagnostic.config {
-  underline = false,
-}
+-- vim.diagnostic.config {
+--   underline = false,
+-- }
+--
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", {
+  undercurl = true,
+  sp = "#E06C75", -- soft red
+})
