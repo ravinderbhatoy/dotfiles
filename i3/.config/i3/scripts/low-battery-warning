@@ -3,17 +3,69 @@
 STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}"
 STATE_FILE="$STATE_DIR/low-battery-warning.state"
 LOG_FILE="$STATE_DIR/low-battery-warning.log"
+POWER_SUPPLY_DIR="${POWER_SUPPLY_DIR:-/sys/class/power_supply}"
 CHECK_INTERVAL=60
 WARN_LEVEL=20
 CRITICAL_LEVEL=10
 STATE_TTL=900
 
-get_battery_dir() {
-    for supply in /sys/class/power_supply/BAT*; do
-        [ -d "$supply" ] && printf '%s\n' "$supply" && return 0
+is_ac_online() {
+    for supply in "$POWER_SUPPLY_DIR"/*; do
+        [ -d "$supply" ] || continue
+        [ "$(cat "$supply/type" 2>/dev/null)" = "Mains" ] || continue
+        [ "$(cat "$supply/online" 2>/dev/null)" = "1" ] && return 0
     done
 
     return 1
+}
+
+get_battery_summary() {
+    total=0
+    count=0
+    has_charging=0
+    has_discharging=0
+    has_not_charging=0
+    has_unknown=0
+
+    for supply in "$POWER_SUPPLY_DIR"/BAT*; do
+        [ -d "$supply" ] || continue
+        capacity=$(cat "$supply/capacity" 2>/dev/null)
+        case "$capacity" in
+            ''|*[!0-9]*) continue ;;
+        esac
+
+        total=$((total + capacity))
+        count=$((count + 1))
+
+        case "$(cat "$supply/status" 2>/dev/null)" in
+            Charging) has_charging=1 ;;
+            Discharging) has_discharging=1 ;;
+            Not\ charging) has_not_charging=1 ;;
+            Full) : ;;
+            *) has_unknown=1 ;;
+        esac
+    done
+
+    [ "$count" -gt 0 ] || return 1
+
+    capacity=$((total / count))
+    if [ "$has_discharging" -eq 1 ]; then
+        status="Discharging"
+    elif [ "$has_charging" -eq 1 ]; then
+        status="Charging"
+    elif [ "$has_not_charging" -eq 1 ] && ! is_ac_online; then
+        status="Discharging"
+    elif [ "$has_unknown" -eq 1 ] && ! is_ac_online; then
+        status="Discharging"
+    elif [ "$has_not_charging" -eq 1 ]; then
+        status="Not charging"
+    elif [ "$has_unknown" -eq 1 ]; then
+        status="Unknown"
+    else
+        status="Full"
+    fi
+
+    printf '%s|%s\n' "$capacity" "$status"
 }
 
 send_warning() {
@@ -50,13 +102,13 @@ if [ -f "$STATE_FILE" ]; then
 fi
 
 while :; do
-    battery_dir=$(get_battery_dir) || exit 0
-    capacity=$(cat "$battery_dir/capacity" 2>/dev/null)
-    status=$(cat "$battery_dir/status" 2>/dev/null)
+    battery_summary=$(get_battery_summary) || exit 0
+    capacity=${battery_summary%%|*}
+    status=${battery_summary#*|}
     now=$(date +%s)
 
     case "$status" in
-        Charging|Full|Not\ charging|Unknown)
+        Charging|Full|Not\ charging)
             last_band=""
             last_time=0
             : > "$STATE_FILE"
