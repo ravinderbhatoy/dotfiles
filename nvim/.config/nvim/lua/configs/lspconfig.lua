@@ -29,13 +29,15 @@ vim.lsp.config("jsonls", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
 })
+
 -- Go
 vim.lsp.config("gopls", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
   settings = {
     gopls = {
-      semanticTokens = true, -- this is the key line
+      semanticTokens = true,
+      gofumpt = true,
     },
   },
 })

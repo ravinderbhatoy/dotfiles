@@ -3,7 +3,7 @@
 set -eu
 
 REPO_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-PACKAGES="i3 dunst polybar rofi picom kitty nvim nsxiv"
+PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv"
 
 if ! command -v stow >/dev/null 2>&1; then
     printf 'error: GNU Stow is not installed\n' >&2

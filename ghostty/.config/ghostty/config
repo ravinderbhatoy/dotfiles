@@ -1,0 +1,15 @@
+theme = Abernathy
+
+font-family = "JetBrainsMono Nerd Font"
+font-size = 16
+
+background-opacity = 0.95
+
+cursor-style = block
+
+window-padding-x = 5
+window-padding-y = 0
+
+window-decoration = none
+confirm-close-surface = false
+copy-on-select = true

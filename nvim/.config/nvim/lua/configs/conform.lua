@@ -5,7 +5,7 @@ local options = {
     typescript = { "prettierd" },
     typescriptreact = { "prettierd" },
     css = { "prettierd" },
-    html = { "prettierd" },
+    html = { "djlint" },
     json = { "prettierd" },
   },
   format_on_save = {

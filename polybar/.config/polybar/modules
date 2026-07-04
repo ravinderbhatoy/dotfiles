@@ -156,3 +156,8 @@ label = "⏻"
 label-foreground = ${colors.aurora-orange}
 label-font = 3
 click-left = ~/.config/polybar/powermenu.sh
+
+[module/systray]
+type = internal/tray
+format-margin = 4pt
+tray-spacing = 4pt

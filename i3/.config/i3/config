@@ -24,6 +24,7 @@ font pango: Hack NF 10
 
 # Start Polybar instead of i3's built-in bar.
 exec_always --no-startup-id "pkill -x polybar; polybar main"
+exec_always --no-startup-id "pkill -x snixembed; command -v snixembed >/dev/null 2>&1 && snixembed"
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec_always --no-startup-id "$HOME/.config/i3/scripts/sync-dunst-colors; pkill -x dunst; dunst"
 exec_always --no-startup-id "pkill -x blueman-applet; blueman-applet"
@@ -56,7 +57,7 @@ tiling_drag modifier titlebar
 
 
 # launch apps
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 bindsym $mod+b exec zen-browser
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
