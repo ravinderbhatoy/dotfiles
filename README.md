@@ -35,23 +35,23 @@ This uses GNU Stow and symlinks each package into `$HOME`.
 
 Install `stow` first.
 
-Core desktop tools used by these configs:
+Core desktop tools used by these configs on Fedora:
 
 ```sh
-sudo pacman -S stow i3-wm i3blocks polybar rofi picom dunst kitty ghostty feh pywal nsxiv xss-lock xclip brightnessctl flameshot autotiling snixembed
+sudo dnf install stow i3 i3blocks rofi picom kitty feh xclip brightnessctl flameshot dunst polybar blueman xss-lock
 ```
 
-Bluetooth tray and notifications:
+Fonts:
 
 ```sh
-sudo pacman -S blueman
+sudo dnf install jetbrains-mono-fonts google-noto-sans-fonts
 ```
 
-You will also likely want:
+You will also likely want the pieces used by the wallpaper and tray workflow:
 
-```sh
-sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts
-```
+`pywal`, `nsxiv`, `ghostty`, `autotiling`, `snixembed`, `dex`, and `i3-resurrect`.
+
+Some of those extras may come from COPR or other third-party repos on Fedora rather than the main `dnf` repos.
 
 ## Notes
 

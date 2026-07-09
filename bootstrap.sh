@@ -7,7 +7,11 @@ PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv"
 
 if ! command -v stow >/dev/null 2>&1; then
     printf 'error: GNU Stow is not installed\n' >&2
-    printf 'install it first, then rerun %s/bootstrap.sh\n' "$REPO_DIR" >&2
+    if [ -r /etc/fedora-release ]; then
+        printf 'install it with: sudo dnf install stow\n' >&2
+    else
+        printf 'install it first, then rerun %s/bootstrap.sh\n' "$REPO_DIR" >&2
+    fi
     exit 1
 fi
 
