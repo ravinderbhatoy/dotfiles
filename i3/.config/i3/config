@@ -1,5 +1,5 @@
 # install following ones
-# xclip (copy to clipboard for nvim)
+# xcli (copy to clipboard for nvim)
 # picom (transparent windows)
 
 
@@ -7,7 +7,7 @@
 set $mod Mod1
 
 # keyboard key repeat rate       (delay) (speed)
-exec --no-startup-id xset r rate 100 20
+exec --no-startup-id xset r rate 300 20
 
 
 # Backlight
@@ -18,18 +18,17 @@ exec --no-startup-id xset r rate 100 20
 #
 
 # Font
-font pango: Hack NF 10
+font pango: Hack Nerd Font 10
 
 # Startup apps
 
 # Start Polybar instead of i3's built-in bar.
-exec_always --no-startup-id "pkill -x polybar; polybar main"
+exec_always --no-startup-id /home/raypamber/.config/i3/launch-polybar.sh
 exec_always --no-startup-id "pkill -x snixembed; command -v snixembed >/dev/null 2>&1 && snixembed"
 exec_always --no-startup-id "pkill -x autotiling; autotiling"
 exec_always --no-startup-id "$HOME/.config/i3/scripts/sync-dunst-colors; pkill -x dunst; dunst"
 exec_always --no-startup-id "pkill -x blueman-applet; blueman-applet"
 exec_always --no-startup-id "pkill -f \"$HOME/.config/i3/scripts/low-battery-warning\"; $HOME/.config/i3/scripts/low-battery-warning"
-exec --no-startup-id kwalletd6
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
 
@@ -57,8 +56,8 @@ tiling_drag modifier titlebar
 
 
 # launch apps
-bindsym $mod+Return exec kitty
-bindsym $mod+b exec zen-browser
+bindsym $mod+Return exec ghostty
+bindsym $mod+b exec brave-browser
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so
@@ -211,18 +210,17 @@ smart_gaps on
 # Borders
 default_border pixel 2
 
-# Change 'color7' and 'color2' to whatever colors you want i3 to use 
-# from the generated scheme.
-# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
-# it fails to get colors from Xresources.
-set_from_resource $bg i3wm.color5 #f0f0f0
-set_from_resource $fg i3wm.color0 #f0f0f0
+# Keep the desktop chrome dark independently of the wallpaper-generated
+# Xresources palette. GTK applications remain on their light theme.
+set $bg #1e1e2e
+set $fg #cdd6f4
+set $focus_border #89b4fa
 
 
 # class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused          $focus_border $bg $fg $focus_border $focus_border
 client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $fg     $bg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
 client.urgent           $bg     $bg     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 

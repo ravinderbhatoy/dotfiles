@@ -20,7 +20,7 @@
     horizontal_padding = 16
     text_icon_padding = 12
     frame_width = 2
-    frame_color = "#D19576"
+    frame_color = "#6A84A0"
     corner_radius = 0
 
     icon_corner_radius = 0
@@ -51,19 +51,19 @@
 [urgency_low]
     background = "#1F2430"
     foreground = "#C8D3F5"
-    frame_color = "#D19576"
+    frame_color = "#6A84A0"
     timeout = 4
 
 [urgency_normal]
     background = "#1B1F2A"
     foreground = "#E5E9F0"
-    frame_color = "#D19576"
+    frame_color = "#6A84A0"
     highlight = "#88C0D0"
     timeout = 6
 
 [urgency_critical]
     background = "#2B1F24"
     foreground = "#F8F8F2"
-    frame_color = "#D19576"
+    frame_color = "#6A84A0"
     highlight = "#D08770"
     timeout = 0

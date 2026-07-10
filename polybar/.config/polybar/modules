@@ -95,7 +95,7 @@ label-foreground = ${colors.foreground}
 
 [module/network]
 type = internal/network
-interface = wlan0
+interface = wlo1
 interval = 3.0
 unknown-as-up = true
 
