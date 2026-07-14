@@ -7,7 +7,8 @@
 set $mod Mod1
 
 # keyboard key repeat rate       (delay) (speed)
-exec --no-startup-id xset r rate 300 20
+exec --no-startup-id xset r rate 200 30
+
 
 
 # Backlight
@@ -57,7 +58,7 @@ tiling_drag modifier titlebar
 
 # launch apps
 bindsym $mod+Return exec ghostty
-bindsym $mod+b exec brave-browser
+bindsym $mod+b exec zen
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so

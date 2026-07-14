@@ -10,6 +10,13 @@ vim.lsp.config("clangd", {
 vim.lsp.config("pylsp", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = { maxLineLength = 100 }, -- Example adjustment
+      },
+    },
+  },
 })
 
 -- TypeScript / React Native
