@@ -10,7 +10,7 @@ case "$key" in
     w)
         wallpaper="$(sed -n '1p' "$tmp_file")"
         [ -n "${wallpaper:-}" ] || exit 0
-        "$HOME/.config/i3/apply-wallpaper.sh" "$wallpaper"
+        "$HOME/.config/i3/scripts/apply-wallpaper.sh" "$wallpaper"
         ;;
 esac
 

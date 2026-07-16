@@ -1,13 +1,13 @@
-theme = Cursor Dark
+theme = 0x96f
 
-font-family = "JetBrainsMono Nerd Font"
+font-family = "FiraCodeNerdFont"
 font-size = 16
 
-background-opacity = 0.98
+background-opacity = 0.95 
 
-curso-style = block
+cursor-style = block
 
-window-padding-x = 5
+window-padding-x = 0
 window-padding-y = 0
 
 window-decoration = server

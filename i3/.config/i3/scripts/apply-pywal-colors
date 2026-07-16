@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+WAL_COLORS="$HOME/.cache/wal/colors.sh"
+I3_CONFIG="$HOME/.config/i3/config"
+
+[ -r "$WAL_COLORS" ] || exit 0
+[ -f "$I3_CONFIG" ] || exit 0
+
+set +u
+. "$WAL_COLORS"
+set -u
+
+BG="${background:-#1e1e2e}"
+FG="${foreground:-#cdd6f4}"
+ACCENT="${color12:-#89b4fa}"
+
+tmp_file=$(mktemp)
+trap 'rm -f "$tmp_file"' EXIT
+
+awk -v bg="$BG" -v fg="$FG" -v accent="$ACCENT" '
+    /^set \$bg / { print "set $bg " bg; next }
+    /^set \$fg / { print "set $fg " fg; next }
+    /^set \$focus_border / { print "set $focus_border " accent; next }
+    { print }
+' "$I3_CONFIG" > "$tmp_file" && mv "$tmp_file" "$I3_CONFIG"
+
+i3-msg reload >/dev/null 2>&1 || true

@@ -9,8 +9,8 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "pastelbeans",
-  transparency = true,
+  theme = "aylin",
+  transparency = false,
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },

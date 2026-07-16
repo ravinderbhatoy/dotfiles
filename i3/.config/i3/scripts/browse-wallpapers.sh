@@ -11,7 +11,7 @@ fi
 
 if command -v nsxiv >/dev/null; then
     mkdir -p "$HOME/.config/nsxiv/exec"
-    ln -sf "$HOME/.config/i3/nsxiv-key-handler" "$HOME/.config/nsxiv/exec/key-handler"
+    ln -sf "$HOME/.config/i3/scripts/nsxiv-key-handler" "$HOME/.config/nsxiv/exec/key-handler"
     find "$WALLPAPER_DIR" -type f \
         \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
         -print0 | xargs -0 nsxiv -tb 2>/dev/null
@@ -25,5 +25,5 @@ feh -r \
     -W 1400 \
     -H 900 \
     --draw-filename \
-    --action "; $HOME/.config/i3/apply-wallpaper.sh %F" \
+    --action "; $HOME/.config/i3/scripts/apply-wallpaper.sh %F" \
     "$WALLPAPER_DIR"
