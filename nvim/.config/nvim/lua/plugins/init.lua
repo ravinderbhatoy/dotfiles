@@ -67,12 +67,21 @@ return {
         "tsx",
         "cpp",
         "python",
+        "markdown",
+        "markdown_inline",
       },
       highlight = {
         enable = true,
         use_languagetree = true,
       },
     },
+  },
+
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "markdown" },
+    opts = {},
   },
 
   {

@@ -152,9 +152,9 @@ smart_gaps on
 # Borders
 default_border pixel 2
 
-set $bg #1b1925
-set $fg #c6c5c8
-set $focus_border #8CB2D6
+set $bg #1e1d1c
+set $fg #c6c6c6
+set $focus_border #B3AC91
 
 # class                 border  backgr. text indicator child_border
 client.focused          $focus_border $bg $fg $focus_border $focus_border
