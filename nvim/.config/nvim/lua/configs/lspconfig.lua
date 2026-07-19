@@ -20,7 +20,7 @@ vim.lsp.config("pylsp", {
 })
 
 -- TypeScript / React Native
-vim.lsp.config("ts_ls", {
+vim.lsp.config("vtsls", {
   on_attach = defaults.on_attach,
   capabilities = defaults.capabilities,
 })
@@ -52,7 +52,7 @@ vim.lsp.config("gopls", {
 vim.lsp.enable {
   "clangd",
   "pylsp",
-  "ts_ls",
+  "vtsls",
   "eslint",
   "jsonls",
   "tailwindCSS",

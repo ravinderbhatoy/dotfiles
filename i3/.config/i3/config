@@ -42,7 +42,7 @@ bindsym $mod+shift+f exec thunar
 bindsym $mod+shift+q kill
 
 # Rofi
-bindsym $mod+space exec --no-startup-id rofi -modi drun -show drun -show-icons \
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -show-icons \
         -config ~/.config/rofi/config.rasi
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/browse-wallpapers.sh
 
@@ -87,7 +87,6 @@ bindsym $mod+Shift+space fullscreen disable, floating toggle, resize set 1100 70
 
 # Focus
 bindsym $mod+a focus parent
-bindsym $mod+d focus child
 
 # Workspaces
 set $ws1 "1"
@@ -152,9 +151,9 @@ smart_gaps on
 # Borders
 default_border pixel 2
 
-set $bg #1e1d1c
-set $fg #c6c6c6
-set $focus_border #B3AC91
+set $bg #0f1924
+set $fg #c3c5c8
+set $focus_border #B9B6B0
 
 # class                 border  backgr. text indicator child_border
 client.focused          $focus_border $bg $fg $focus_border $focus_border
