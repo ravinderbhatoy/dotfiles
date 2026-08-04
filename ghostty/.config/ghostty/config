@@ -1,15 +1,24 @@
-theme = Atom One Dark
+theme = 0x96f
 
-font-family = "FiraCodeNerdFont"
+font-family = "0xProto Nerd Font"
 font-size = 16
 
-background-opacity = 0.95 
+background-opacity = 0.90
 
 cursor-style = block
 
 window-padding-x = 0
 window-padding-y = 0
 
+window-padding-balance = true
+
+window-padding-color = extend
+
 window-decoration = server
 confirm-close-surface = false
 copy-on-select = true
+
+env = EDITOR=nvim
+env = VISUAL=nvim
+
+config-file = ?auto/theme.ghostty

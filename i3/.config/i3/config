@@ -18,6 +18,8 @@ exec_always --no-startup-id "pkill -x blueman-applet; blueman-applet"
 exec_always --no-startup-id "pkill -f \"$HOME/.config/i3/scripts/low-battery-warning\"; $HOME/.config/i3/scripts/low-battery-warning"
 exec --no-startup-id picom
 exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id /usr/libexec/xdg-desktop-portal-gtk -r
+exec --no-startup-id /usr/libexec/xdg-desktop-portal -r
 exec --no-startup-id sh -c 'wal -R && $HOME/.config/i3/scripts/apply-pywal-colors'
 exec --no-startup-id setxkbmap -option 'caps:swapescape'
 
@@ -47,27 +49,18 @@ bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -show-icons \
 bindsym $mod+Shift+w exec --no-startup-id ~/.config/i3/scripts/browse-wallpapers.sh
 
 # Change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $mod+h focus right
+bindsym $mod+j focus down
+bindsym $mod+l focus left
+bindsym $mod+k focus up
 
 # Move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+l move left
+bindsym $mod+Shift+k move up
 
 # Split
-bindsym $mod+h split h
 bindsym $mod+v split v
 
 # Fullscreen
@@ -151,9 +144,9 @@ smart_gaps on
 # Borders
 default_border pixel 2
 
-set $bg #0f1924
-set $fg #c3c5c8
-set $focus_border #B9B6B0
+set $bg #0f0f23
+set $fg #c3c3c8
+set $focus_border #8C8FAA
 
 # class                 border  backgr. text indicator child_border
 client.focused          $focus_border $bg $fg $focus_border $focus_border

@@ -9,8 +9,8 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "chadracula",
-  transparency = false,
+  theme = "tundra",
+  transparency = true,
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
