@@ -13,45 +13,47 @@ Personal Linux desktop configuration managed with GNU Stow.
 - `ghostty`
 - `nvim`
 - `nsxiv`
+- `zsh`
 
 ## Setup
 
 Clone the repo:
 
 ```sh
-git clone <your-repo-url> ~/dotfiles
+git clone https://github.com/ravinderbhatoy/dotfiles ~/dotfiles
 cd ~/dotfiles
 ```
 
-Apply the dotfiles:
+Or just run the bootstrap script — it will clone the repo automatically if
+you don't have it yet:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ravinderbhatoy/dotfiles/main/bootstrap.sh | sh
+```
+
+Then apply the dotfiles:
 
 ```sh
 ./bootstrap.sh
 ```
 
-This uses GNU Stow and symlinks each package into `$HOME`.
+The bootstrap script:
+
+1. Clones this repo into `~/dotfiles` if it isn't already present.
+2. Installs `git`, `stow`, and the Nerd Fonts used by the configs
+   (`JetBrains Mono`, `FiraCode`, `0xProto`) via `pacman` (using `paru` or
+   `yay` if available).
+3. Uses GNU Stow to symlink each package into `$HOME`.
 
 ## Requirements
 
-Install `stow` first.
+CachyOS / Arch-based system (the script checks for `pacman`).
 
-Core desktop tools used by these configs on Fedora:
-
-```sh
-sudo dnf install stow i3 i3blocks rofi picom kitty feh xclip brightnessctl flameshot dunst polybar blueman xss-lock
-```
-
-Fonts:
+The font packages installed by the bootstrap script are:
 
 ```sh
-sudo dnf install jetbrains-mono-fonts google-noto-sans-fonts
+ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-0xproto-nerd
 ```
-
-You will also likely want the pieces used by the wallpaper and tray workflow:
-
-`pywal`, `nsxiv`, `ghostty`, `autotiling`, `snixembed`, `dex`, and `i3-resurrect`.
-
-Some of those extras may come from COPR or other third-party repos on Fedora rather than the main `dnf` repos.
 
 ## Notes
 
