@@ -7,10 +7,11 @@ tmp_file="$(mktemp)"
 cat > "$tmp_file"
 
 case "$key" in
-    w)
+    w|W|Return|enter)
         wallpaper="$(sed -n '1p' "$tmp_file")"
-        [ -n "${wallpaper:-}" ] || exit 0
-        "$HOME/.config/i3/scripts/apply-wallpaper.sh" "$wallpaper"
+        if [ -n "${wallpaper:-}" ] && [ -f "$wallpaper" ]; then
+            "$HOME/.config/i3/scripts/apply-wallpaper.sh" "$wallpaper"
+        fi
         ;;
 esac
 

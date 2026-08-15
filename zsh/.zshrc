@@ -19,6 +19,9 @@ alias lsa="eza -l -a --icons"
 alias chwal="~/./changeWallpaper.sh"
 alias cursor='~/Applications/cursor.AppImage --no-sandbox'
 alias ls='eza --icons'
+alias ga='git add .'
+alias gwp='git commit -m "work in progress"'
+alias gp='git push'
 eval "$(zoxide init zsh)"
 bindkey -v
 KEYTIMEOUT=1
@@ -32,6 +35,8 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 export PATH="$HOME/Applications:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # Load NVM only when a Node command is actually used, rather than delaying every
 # new terminal. The function replaces itself with NVM's real command on first use.

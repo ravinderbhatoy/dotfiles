@@ -2,7 +2,11 @@
 set -eu
 REPO_URL="https://github.com/ravinderbhatoy/dotfiles"
 DEFAULT_REPO_DIR="$HOME/dotfiles"
-PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh"
+# Names of GNU Stow packages in this repository.
+STOW_PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh"
+# Runtime dependencies for the configurations above.  The Arch package for i3
+# is i3-wm (there is no package named "i3").
+OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh flameshot brightnessctl feh python-pywal libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
 FONTS="ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-0xproto-nerd ttf-hack-nerd"
 # AUR-only packages -- not in official Arch/CachyOS repos, require paru or yay.
 AUR_PACKAGES="zen-browser-bin autotiling i3-resurrect snixembed"
@@ -49,8 +53,8 @@ install_packages() {
             ;;
     esac
 }
-printf 'installing core dependencies (git, stow)...\n'
-install_packages git stow
+printf 'installing official packages...\n'
+install_packages $OFFICIAL_PACKAGES
 
 printf 'installing fonts: %s\n' "$FONTS"
 if ! install_packages $FONTS; then
@@ -74,17 +78,17 @@ fi
 # On a fresh install, $HOME often already has stock dotfiles (e.g. default
 # .zshrc, .config skeleton from the live ISO). Plain `stow --restow` will
 # fail loudly if a target file exists and isn't already a stow-owned symlink.
-# STOW_ADOPT=1 makes stow absorb existing files into the repo's working tree
-# instead of aborting -- then we discard any local drift with `git checkout`
-# so the repo's version wins, matching normal (non-adopt) behavior.
+# STOW_ADOPT=1 makes stow absorb existing files into the repository working
+# tree instead of aborting. The adopted content is deliberately retained for
+# review; silently resetting it would destroy a user's existing configuration.
 STOW_ADOPT="${STOW_ADOPT:-0}"
 STOW_FLAGS="--restow"
 if [ "$STOW_ADOPT" = "1" ]; then
     STOW_FLAGS="--adopt --restow"
-    printf 'STOW_ADOPT=1: existing conflicting files will be adopted into the repo, then reset to repo versions\n'
+    printf 'STOW_ADOPT=1: existing conflicting files will be adopted into the repo; review git diff afterward\n'
 fi
 
-for package in $PACKAGES; do
+for package in $STOW_PACKAGES; do
     if [ ! -d "$package" ]; then
         printf 'warning: skipping missing package %s\n' "$package" >&2
         continue
@@ -96,19 +100,13 @@ for package in $PACKAGES; do
         rm -f /tmp/stow_err_$$
         if [ "$STOW_ADOPT" != "1" ]; then
             printf 'error: stow conflict for "%s". existing files in $HOME are blocking the symlink.\n' "$package" >&2
-            printf '  re-run with STOW_ADOPT=1 to absorb them into the repo (their content will then be\n' >&2
-            printf '  overwritten by the repo version via git checkout), or remove the conflicting files\n' >&2
+            printf '  re-run with STOW_ADOPT=1 to absorb them into the repo for review, or remove the conflicting files\n' >&2
             printf '  manually and re-run.\n' >&2
             exit 1
         else
             printf 'error: stow --adopt still failed for "%s"; inspect manually\n' "$package" >&2
             exit 1
         fi
-    fi
-    if [ "$STOW_ADOPT" = "1" ]; then
-        # discard any content adopted from pre-existing $HOME files so the
-        # repo's tracked version is authoritative, not whatever was on disk
-        git checkout -- "$package" 2>/dev/null || true
     fi
 done
 

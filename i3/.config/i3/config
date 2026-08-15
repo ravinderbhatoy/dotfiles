@@ -1,11 +1,13 @@
 set $mod Mod1
 
-exec --no-startup-id xset r rate 250 20
+exec --no-startup-id xset r rate 300 15
 
 # Backlight
 bindsym XF86MonBrightnessUp exec brightnessctl -c backlight set +3%
 bindsym XF86MonBrightnessDown exec brightnessctl -c backlight set 3%-
-bindsym Print exec flameshot gui
+# Start Flameshot without i3 startup notification; it otherwise may fail to
+# present its capture overlay when launched from a key binding.
+bindsym Print exec --no-startup-id /usr/sbin/flameshot gui
 
 font pango: Hack Nerd Font 10
 
@@ -32,7 +34,7 @@ tiling_drag modifier titlebar
 
 # Launch apps
 bindsym $mod+Return exec ghostty
-bindsym $mod+b exec zen
+bindsym $mod+b exec --no-startup-id /usr/bin/zen-browser
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so

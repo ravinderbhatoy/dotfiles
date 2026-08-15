@@ -9,14 +9,24 @@ if [ ! -d "$WALLPAPER_DIR" ]; then
     exit 1
 fi
 
-if command -v nsxiv >/dev/null; then
+if command -v nsxiv >/dev/null 2>&1; then
     mkdir -p "$HOME/.config/nsxiv/exec"
     ln -sf "$HOME/.config/i3/scripts/nsxiv-key-handler" "$HOME/.config/nsxiv/exec/key-handler"
-    find "$WALLPAPER_DIR" -type f \
+    chmod +x "$HOME/.config/i3/scripts/nsxiv-key-handler"
+
+    selected=$(find "$WALLPAPER_DIR" -type f \
         \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
-        -print0 | xargs -0 nsxiv -tb 2>/dev/null
+        -print0 | xargs -0 nsxiv -t -o 2>/dev/null)
+
+    if [ -n "${selected:-}" ]; then
+        echo "$selected" | while IFS= read -r wallpaper; do
+            [ -n "$wallpaper" ] && [ -f "$wallpaper" ] && "$HOME/.config/i3/scripts/apply-wallpaper.sh" "$wallpaper"
+        done
+    fi
     exit 0
 fi
+
+notify-send "Wallpaper Browser" "nsxiv is not installed! Run 'sudo pacman -S nsxiv' to install it."
 
 feh -r \
     -t \
