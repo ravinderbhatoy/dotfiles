@@ -34,7 +34,7 @@ tiling_drag modifier titlebar
 
 # Launch apps
 bindsym $mod+Return exec ghostty
-bindsym $mod+b exec --no-startup-id /usr/bin/zen-browser
+bindsym $mod+b exec --no-startup-id brave
 bindsym $mod+Shift+b exec --no-startup-id chromium --app=https://web.whatsapp.com
 bindsym $mod+Shift+g exec --no-startup-id chromium --app=https://chatgpt.com
 bindsym $mod+Shift+n exec --no-startup-id chromium --app=https://www.notion.so
