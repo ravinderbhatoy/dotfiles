@@ -6,9 +6,23 @@ export ZSH="$HOME/.oh-my-zsh"
 fpath+=($HOME/.zsh/pure)
 ZSH_THEME="robbyrussell"
 
+# Tmux plugin configuration (must be set before oh-my-zsh is sourced)
+
 plugins=(git fast-syntax-highlighting zsh-autosuggestions)
 
+# opencode
+export PATH=/home/raypamber/.opencode/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.config/emacs/bin:$PATH"
+export PATH="$HOME/Applications:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export LANG="en_IN.UTF-8"
+export LC_ALL="en_IN.UTF-8"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -26,17 +40,6 @@ eval "$(zoxide init zsh)"
 bindkey -v
 KEYTIMEOUT=1
 
-# opencode
-export PATH=/home/raypamber/.opencode/bin:$PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/go/bin:$PATH"
-export PATH="$HOME/.npm-global/bin:$PATH"
-export PATH="$HOME/.config/emacs/bin:$PATH"
-export PATH="$HOME/Applications:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-export EDITOR="nvim"
-export VISUAL="nvim"
 
 # Load NVM only when a Node command is actually used, rather than delaying every
 # new terminal. The function replaces itself with NVM's real command on first use.
