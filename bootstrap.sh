@@ -9,7 +9,7 @@ STOW_PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh"
 OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh flameshot brightnessctl feh python-pywal libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
 FONTS="ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-0xproto-nerd ttf-hack-nerd"
 # AUR-only packages -- not in official Arch/CachyOS repos, require paru or yay.
-AUR_PACKAGES="zen-browser-bin autotiling i3-resurrect snixembed"
+AUR_PACKAGES="brave-bin autotiling i3-resurrect snixembed"
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 if [ -d "$SCRIPT_DIR/.git" ]; then
     REPO_DIR="$SCRIPT_DIR"

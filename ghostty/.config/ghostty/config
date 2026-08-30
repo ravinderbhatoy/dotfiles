@@ -1,9 +1,9 @@
 theme = 0x96f
 
-font-family = "JetBrainsMono Nerd Font"
-font-size = 16
+font-family = "FantasqueSansM Nerd Font"
+font-size = 18
 
-background-opacity = 0.92
+background-opacity = 0.95
 
 cursor-style = block
 
