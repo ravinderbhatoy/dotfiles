@@ -14,6 +14,7 @@ Personal Linux desktop configuration managed with GNU Stow.
 - `nvim`
 - `nsxiv`
 - `zsh`
+- `tmux`
 
 ## Setup
 

@@ -9,7 +9,7 @@ M.ui = {
 }
 
 M.base46 = {
-  theme = "aquarium",
+  theme = "aylin",
   transparency = true,
   hl_override = {
     Comment = { italic = true },

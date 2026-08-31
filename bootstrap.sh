@@ -3,10 +3,10 @@ set -eu
 REPO_URL="https://github.com/ravinderbhatoy/dotfiles"
 DEFAULT_REPO_DIR="$HOME/dotfiles"
 # Names of GNU Stow packages in this repository.
-STOW_PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh"
+STOW_PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh tmux"
 # Runtime dependencies for the configurations above.  The Arch package for i3
 # is i3-wm (there is no package named "i3").
-OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh flameshot brightnessctl feh python-pywal libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
+OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh tmux flameshot brightnessctl feh python-pywal libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
 FONTS="ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-0xproto-nerd ttf-hack-nerd"
 # AUR-only packages -- not in official Arch/CachyOS repos, require paru or yay.
 AUR_PACKAGES="brave-bin autotiling i3-resurrect snixembed"
