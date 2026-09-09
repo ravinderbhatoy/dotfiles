@@ -52,3 +52,7 @@ nvm() {
 node() { nvm node "$@"; }
 npm() { nvm npm "$@"; }
 npx() { nvm npx "$@"; }
+
+# Qwen Code PATH block begin
+export PATH='/home/raypamber/.local/bin':$PATH
+# Qwen Code PATH block end
