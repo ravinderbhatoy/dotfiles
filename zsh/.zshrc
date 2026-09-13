@@ -56,3 +56,7 @@ npx() { nvm npx "$@"; }
 # Qwen Code PATH block begin
 export PATH='/home/raypamber/.local/bin':$PATH
 # Qwen Code PATH block end
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/raypamber/.local/bin:$PATH"

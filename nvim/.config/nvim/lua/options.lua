@@ -3,6 +3,8 @@ local opt = vim.opt
 
 -- Set the maximum width for text to 80 characters
 vim.opt.textwidth = 80
+vim.opt.clipboard = "unnamedplus"
+
 
 -- Enable soft wrapping
 opt.wrap = true

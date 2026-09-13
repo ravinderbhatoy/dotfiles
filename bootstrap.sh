@@ -6,10 +6,10 @@ DEFAULT_REPO_DIR="$HOME/dotfiles"
 STOW_PACKAGES="i3 dunst polybar rofi picom kitty ghostty nvim nsxiv zsh tmux"
 # Runtime dependencies for the configurations above.  The Arch package for i3
 # is i3-wm (there is no package named "i3").
-OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh tmux flameshot brightnessctl feh python-pywal libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
+OFFICIAL_PACKAGES="git stow i3-wm dunst polybar rofi picom kitty ghostty neovim nsxiv zsh tmux flameshot brightnessctl feh libnotify xorg-xset xorg-setxkbmap pipewire-pulse blueman dex chromium thunar"
 FONTS="ttf-jetbrains-mono-nerd ttf-firacode-nerd ttf-0xproto-nerd ttf-hack-nerd"
 # AUR-only packages -- not in official Arch/CachyOS repos, require paru or yay.
-AUR_PACKAGES="brave-bin autotiling i3-resurrect snixembed"
+AUR_PACKAGES="brave-bin autotiling i3-resurrect snixembed pywal"
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 if [ -d "$SCRIPT_DIR/.git" ]; then
     REPO_DIR="$SCRIPT_DIR"
