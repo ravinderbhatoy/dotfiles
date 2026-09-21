@@ -42,17 +42,18 @@ return {
       }
     end,
   },
-
   {
     "vague-theme/vague.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("vague").setup {}
+      require("vague").setup {
+        transparent = true,
+        bold = true,
+        italic = true,
+      }
     end,
   },
-
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
